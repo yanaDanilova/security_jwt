@@ -2,20 +2,21 @@ package com.springboot.security_jwt;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class AppUser {
+public class UserEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String password;
 
-    public AppUser() {
+    public UserEntity() {
     }
 
-    public AppUser(Long id, String username, String password) {
+    public UserEntity(Long id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;

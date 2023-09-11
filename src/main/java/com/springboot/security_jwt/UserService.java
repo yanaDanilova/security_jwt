@@ -1,21 +1,23 @@
 package com.springboot.security_jwt;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service
+import java.util.Optional;
 
-public class UserService  {
-    private final UserRepository userRepository;
+@Service
+public class UserService implements UserDetailsService {
 
     @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    private UserRepository repository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+       Optional<UserEntity> optionalUserEntity = repository.findByUsername(username);
+       return optionalUserEntity.map(CustomUserDetails::new).orElseThrow(()->new UsernameNotFoundException("User with this name doesn't exist"));
     }
 
-
-    public AppUser loadUserByUsername(String username)  {
-        return  userRepository.findByUsername(username);
-
-    }
 }

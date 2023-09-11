@@ -2,6 +2,8 @@ package com.springboot.security_jwt;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<AppUser,Long> {
-    AppUser findByUsername(String username);
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<UserEntity,Long> {
+    Optional<UserEntity> findByUsername(String username);
 }
