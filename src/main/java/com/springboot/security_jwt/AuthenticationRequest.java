@@ -1,15 +1,16 @@
 package com.springboot.security_jwt;
 
-public class JwtRequest {
+public class AuthenticationRequest {
+
     private String username;
     private String password;
 
-    public JwtRequest(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public AuthenticationRequest() {
     }
 
-    public JwtRequest() {
+    public AuthenticationRequest(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public String getUsername() {
